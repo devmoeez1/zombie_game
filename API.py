@@ -169,7 +169,13 @@ def fight(player, weaponOfChoice, enemy):
 
         # Get player input for the attack command
         attack_command = input("Enter attack command (A for quick attack, B for strong attack): ").upper()
-
+        if attack_command in ["A", "B"]:
+            if attack_command == "A":
+             damage = 10
+             print(f"you did a quick attack and deals {damage} damage")
+            elif attack_command == "B":
+             damage = 30
+             print(f"you did a strong attack  and deals {damage} damage")
         # Player attacks the enemy
         player.attack(enemy, attack_command)
 
