@@ -2,12 +2,14 @@ import time
 import random
 
 
-# TODO: if fought against, let it fight back - function done but have some bugs.
+# TODO: if fought against, let it fight back - function done.
 # TODO: if fight decrease the health according to the weapon - done.
-# TODO : change durability issue for the gravedigger - in progress.
-# TODO : if player's health is a 0 game over
-# TODO : fix command A and B, not working
-# TODO : 
+# TODO : change durability issue for the gravedigger - done.
+# TODO : if player's health is a 0 game over done. 
+# TODO : fix command A and B, done.
+# TODO : manage errors more efficiently
+# TODO : adding RNG
+# TODO : add pickups
 
 
 
@@ -135,8 +137,8 @@ class Player(Entity):
         elif attack_type == "fork":
             damage = 50
             print(f"{self.name} performs a  the strongest attack and deals {damage} damage.")
-        else:
-            print(f"{self.name} doesn't understand the command.")
+        #else:
+            #print(f"{self.name} doesn't understand the command.")
     
 class Enemy(Entity):
     def __init__(self, name, health):
@@ -171,17 +173,20 @@ def fight(player, weaponOfChoice, enemy):
         attack_command = input("Enter attack command (A for quick attack, B for strong attack): ").upper()
         if attack_command in ["A", "B"]:
             if attack_command == "A":
-             damage = 10
-             print(f"you did a quick attack and deals {damage} damage")
+
+                enemy.health -= 10
+                print(f"you did a quick attack and deals damage")
             elif attack_command == "B":
-             damage = 30
-             print(f"you did a strong attack  and deals {damage} damage")
+
+                enemy.health -= 30
+                print(f"you did a strong attack  and deals damage")
         # Player attacks the enemy
         player.attack(enemy, attack_command)
 
         # Check if the enemy is defeated
         if enemy.health <= 0:
             print(f"{enemy.name} has been defeated! {player.name} is victorious!")
+            print(f"{player.name} Health: {player.health}, {enemy.name} Health: {enemy.health}")
             break
 
         # Enemy attacks the player
@@ -192,6 +197,9 @@ def fight(player, weaponOfChoice, enemy):
         # Check if the player is defeated
         if player.health <= 0:
             print(f"{player.name} has been defeated! {enemy.name} is victorious!")
+            print("game over")
+            print(f"{player.name} Health: {player.health}, {enemy.name} Health: {enemy.health}")
+            quit()
             break
 
 
