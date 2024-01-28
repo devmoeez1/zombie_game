@@ -12,8 +12,7 @@ import random
 # TODO : add pickups
 
 
-
-
+random = random.randint(1,5)
 
 
 class Item():
@@ -69,7 +68,19 @@ class Weapon(Item): # inherits from Item (child of item)
         durabilityToAdd = self.max_durability - self.durability
         self.__addDurability(durabilityToAdd)
         print(f"Fixed your {self.name},")
-        
+    
+    def Random(self,randint):
+        self.Random = random
+        if(random == 1):
+            
+            print("it did nothing too bad.")
+        elif(random == 5):
+            
+            print("that double the damage wow.")
+        else:
+            print("that normal oh well.")
+
+
 
 arsenal = { # name, description, damage, durability
     "baseball bat": Weapon("bat","with a baseball bat", 25, 49),
@@ -170,7 +181,7 @@ def fight(player, weaponOfChoice, enemy):
         print(f"{player.name} Health: {player.health}, {enemy.name} Health: {enemy.health}")
 
         # Get player input for the attack command
-        attack_command = input("Enter attack command (A for quick attack, B for strong attack): ").upper()
+        attack_command = input("Enter attack command (A for quick attack, B for strong attack,C for a random hit): ").upper()
         if attack_command in ["A", "B"]:
             if attack_command == "A":
 
@@ -180,7 +191,15 @@ def fight(player, weaponOfChoice, enemy):
 
                 enemy.health -= 30
                 print(f"you did a strong attack  and deals damage")
+            elif attack_command == "C":
+
+                enemy.health -= random
+                print("you decide to go random let see how it goes.")
+                random
+            
         # Player attacks the enemy
+        
+        
         player.attack(enemy, attack_command)
 
         # Check if the enemy is defeated
